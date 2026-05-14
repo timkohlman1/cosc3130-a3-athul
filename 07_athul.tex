@@ -29,3 +29,96 @@ Hu et al.\ \cite{Hu2022} provide a comprehensive survey of deep learning methods
 \subsection{Summary of Additional Literature Contributions}
 
 The papers reviewed in this chapter complement the existing literature review by addressing dimensions not fully covered in the primary survey. Collectively, they reinforce three key arguments underlying the MACE framework: first, that temporal and propagation-based social context signals provide strong classification value independent of content modality \cite{Liu2020, Bian2020}; second, that cross-modal consistency and shared multimodal representations enhance fake news detection beyond what either modality achieves independently \cite{Zhou2020, Khattar2019}; and third, that the controlled evaluation of multimodal substitution within context-aware architectures represents a recognised and unaddressed gap in the literature \cite{Luo2021, Hu2022}. Together, these contributions strengthen the motivation for the MACE framework and provide additional benchmarking context for its experimental evaluation.
+
+% ---------------------------------------------------------------
+\section{Reflection on Evaluation Plan}
+% ---------------------------------------------------------------
+
+The evaluation plan outlined in Section 5 focuses on benchmarking MACE against DANES, GETAE, HMCAN, MPFN, DPSG, and Dellys et al.\ across FakeNewsNet and MuMin datasets. The additional literature reviewed in this chapter suggests several opportunities to further strengthen the evaluation design.
+
+First, SAFE \cite{Zhou2020} and MVAE \cite{Khattar2019} represent established multimodal baselines that are well-cited and widely used in comparative evaluations across the fake news detection literature. Including them as additional benchmarks in the multimodal-without-social-context domain (alongside HMCAN and MPFN) would broaden the comparison set and provide a more complete picture of where MACE's content branch sits relative to prior multimodal work.
+
+Second, Bi-GCN \cite{Bian2020} offers a strong propagation-based baseline that is directly evaluated on Twitter15 and Twitter16 — the same datasets used in MACE Stage 1. Its inclusion as an additional social-context baseline would allow for a more granular comparison of the DANES and GETAE social branches against an independent graph-based rumour detection model, strengthening the evidence base for retaining the propagation-graph social context branch in the full MACE framework.
+
+Third, the NewsCLIPpings dataset \cite{Luo2021} presents a compelling supplementary evaluation set, as it specifically targets out-of-context multimodal misinformation — a category that is structurally distinct from the fabricated content in Twitter15/16 and FakeNewsNet. Evaluating MACE on NewsCLIPpings as an additional held-out benchmark would test the generalisability of the multimodal content branch to real-world misuse patterns where images are authentic but contextually misleading, a scenario not well represented by existing benchmark datasets.
+
+Finally, the survey by Hu et al.\ \cite{Hu2022} notes that statistical significance testing and reporting of variance across runs remain inconsistently applied in the fake news detection literature. This reinforces the importance of the McNemar's test and paired t-test procedures already planned in the MACE evaluation framework, and suggests that reporting mean and standard deviation across multiple runs should be explicitly prioritised to ensure the reproducibility and credibility of results.
+
+% ---------------------------------------------------------------
+\section{Additional Literature Review Summary}
+% ---------------------------------------------------------------
+
+Table~\ref{tab:athul_lit_review} extends the Literature Review Summary Table (Table A.1) with the six additional studies reviewed in this chapter.
+
+\begin{table}[ht]
+\centering
+\caption{Additional studies on multimodal and context-aware misinformation detection.}
+\label{tab:athul_lit_review}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3.5cm}|p{5.0cm}|p{4.5cm}|}
+\hline
+\textbf{Study and focus} & \textbf{Key finding / contribution} & \textbf{Main limitation} \\
+\hline
+Khattar et al.\ \cite{Khattar2019} -- MVAE \newline Multimodal variational autoencoder &
+Demonstrated that generative multimodal modelling via a bimodal VAE outperforms discriminative baselines by up to 6\% accuracy on Twitter and Weibo &
+Does not incorporate social context or propagation signals; evaluated only on content-level features \\
+\hline
+Liu \& Wu \cite{Liu2020} -- FNED \newline Fake news early detection &
+Showed that temporal crowd-response patterns enable accurate detection within minutes of publication, achieving over 90\% accuracy on Twitter and Weibo &
+Relies on early user response data which may be sparse for low-engagement posts; no visual modality \\
+\hline
+Bian et al.\ \cite{Bian2020} -- Bi-GCN \newline Bi-directional propagation graphs &
+Established that encoding both top-down and bottom-up propagation structures significantly outperforms unidirectional graph models on Twitter15, Twitter16, and Weibo &
+Requires full propagation tree structure; performance degrades in early detection scenarios with incomplete graphs \\
+\hline
+Zhou et al.\ \cite{Zhou2020} -- SAFE \newline Image-text similarity modelling &
+Showed that explicit similarity scoring between text and image modalities improves fake news detection and provides interpretable cross-modal inconsistency signals &
+Similarity-based approach may underperform when both modalities are individually coherent but jointly misleading \\
+\hline
+Luo et al.\ \cite{Luo2021} -- NewsCLIPpings \newline Out-of-context multimodal benchmark &
+Introduced a large-scale benchmark targeting out-of-context image-caption mismatches, now a standard evaluation dataset for multimodal misinformation detection &
+Dataset focuses on a specific misinformation subtype; does not include social context or propagation structure \\
+\hline
+Hu et al.\ \cite{Hu2022} \newline Deep learning survey &
+Provided a comprehensive review identifying the integration of multimodal content and social context as an unresolved gap, directly motivating the MACE research questions &
+As a survey, does not propose a new model or resolve the identified gap experimentally \\
+\hline
+\end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------
+\section*{Generative AI Usage}
+\addcontentsline{toc}{section}{Generative AI Usage}
+% ---------------------------------------------------------------
+
+\subsection*{Declaration}
+
+This contribution was primarily human-created. AI was used to support literature discovery, citation verification, and writing clarity. AI-generated content was reviewed, verified against primary sources, and approved before inclusion. The following model was used: Claude AI (Anthropic), Claude Sonnet.
+
+\begin{table}[ht]
+\centering
+\caption{Generative AI usage report — Claude AI (Athul's contribution)}
+\label{tab:athul_genai}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4.5cm}|p{8.5cm}|}
+\hline
+\textbf{Field} & \textbf{Details} \\
+\hline
+1. GenAI tool used & Claude AI (Anthropic), Claude Sonnet 4.6 \\
+\hline
+2. Purpose for this assignment & Literature discovery and verification, drafting and refining written sections, checking citation accuracy, and identifying research papers relevant to the MACE framework not already included in the team's bibliography. \\
+\hline
+3. Prompts or instructions given & Representative prompts included: ``Find research papers on multimodal fake news detection not already in our bibliography''; ``Verify these 6 paper citations exist and are correctly attributed''; ``Write a LaTeX extended literature review section using these papers in the style of the existing proposal''; ``Suggest how these papers could strengthen the evaluation plan''. \\
+\hline
+4. Number of prompts given & Approximately 15--20 prompts across the literature discovery, verification, and writing stages. \\
+\hline
+5. Summary of GenAI output & Claude suggested candidate papers and their citations, verified them against academic databases, drafted LaTeX sections for the extended literature review and evaluation reflection, and formatted the bibliography entries in BibTeX. \\
+\hline
+6. Verification of GenAI output & All suggested paper citations were independently verified against Google Scholar, ACL Anthology, ACM Digital Library, and DBLP before inclusion. One suggested citation was found to be fabricated and replaced with a verified alternative. All DOIs were confirmed as valid. \\
+\hline
+7. Usage or modification of output & LaTeX drafts were reviewed and edited for accuracy, tone, and alignment with the existing proposal. All research arguments, connections to MACE, and analytical claims were evaluated and approved. No AI-generated content was included without human review. \\
+\hline
+8. Reflection & Useful for accelerating literature discovery and drafting, but required significant human oversight throughout. One hallucinated citation was identified and replaced through independent verification across multiple academic databases. AI-generated drafts were substantially reviewed and edited to ensure accuracy, contextual relevance, and alignment with the research proposal. The tool supported the process but did not replace critical thinking or scholarly judgement. \\
+\hline
+\end{tabular}
+\end{table}
